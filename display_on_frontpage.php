@@ -38,6 +38,7 @@ class Display_On_Frontpage
 		$frontpage = get_post_meta($post->ID, 'tc_frontpage_option', TRUE);
 		$frontpage_title = get_post_meta($post->ID, 'tc_frontpage_title', TRUE);
 		$frontpage_order = get_post_meta($post->ID, 'tc_frontpage_order', TRUE);
+		wp_nonce_field(plugin_basename(__FILE__),'tc_frontpage_nonce');
 		?>
 		<p><label for="display_on_frontpage"><strong>Display on front page? </strong> </label><input type="checkbox" name="display_on_frontpage" id="display_on_frontpage?" <?php if($frontpage) echo 'checked="checked"' ?>></p>
 		<p><label for="frontpage_title"><strong>Front page title</strong></label></p>
@@ -51,6 +52,7 @@ class Display_On_Frontpage
 	{
 		global $post;
 		if( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+		if(!wp_verify_nonce($_POST['tc_frontpage_nonce'], plugin_basename(__FILE__)));
 		if(isset($_POST['display_on_frontpage']))
 		{
 			update_post_meta($post->ID, 'tc_frontpage_option', true);
