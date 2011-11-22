@@ -83,10 +83,10 @@ class Display_On_Frontpage
 	// TODO - Add an Admin page to display page appearing on the Frontpage
 	function frontpage_menu()
 	{
-		add_pages_page( 'Frontpage', 'Front page', 'read', 'tc_frontpage', 'tc_frontpage_list');
+		add_pages_page( 'Frontpage', 'Front page', 'read', 'tc_frontpage', array($this, 'tc_frontpage_admin'));
 	}
 
-	function tc_frontpage_list()
+	function tc_frontpage_admin()
 	{
 		echo "<h2>" . __( 'Front page', 'front-page' ) . "</h2>";
 	}
