@@ -82,15 +82,26 @@ class Display_On_Frontpage
 		}
 	}
 
-	// TODO - Add an Admin page to display page appearing on the Frontpage
 	function frontpage_menu()
 	{
 		add_pages_page( 'Frontpage', 'Front page', 'read', 'tc_frontpage', array($this, 'tc_frontpage_admin'));
 	}
 
 	function tc_frontpage_admin()
-	{
-		echo "<h2>" . __( 'Front page', 'front-page' ) . "</h2>";
+	{	
+		echo '<div class="wrap">';
+		echo "\n\t" . '<div id="icon-edit-pages" class="icon32 icon32-posts-page"><br /></div>' ;
+		echo "\n" . "<h2>" . __( 'Front page', 'front-page' ) . "</h2>";
+		
+			// Get instance of WP List Table
+			include('wp_admin_table.php');
+			$wp_admin_table = new wp_admin_table();
+			
+			// Prepare data and display table
+			$wp_admin_table->prepare_items();
+			$wp_admin_table->display();	
+			
+		echo '</div>';
 	}
 }
 
